@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
 interface Project {
   title: string;
@@ -11,32 +10,45 @@ interface Project {
   image: string;
   link?: string;
   github?: string;
+  achievements: string[];
 }
 
 const projects: Project[] = [
   {
     title: "High-Performance Data Store",
-    description: "Built a distributed key-value store using RocksDB and custom compaction strategies. Achieved 100k+ ops/sec with sub-millisecond latency.",
-    technologies: ["Java", "RocksDB", "gRPC", "Docker"],
+    description: "Led the development of a distributed key-value store using RocksDB and custom compaction strategies. Designed and implemented the core storage engine with focus on performance and reliability.",
+    technologies: ["Java 17", "RocksDB", "gRPC", "Docker", "Kubernetes"],
     category: "backend",
     image: "/projects/data-store.jpg",
-    github: "https://github.com/yourusername/data-store"
+    achievements: [
+      "Achieved 100k+ ops/sec with sub-millisecond latency",
+      "Reduced storage costs by 40% through optimized compaction strategies",
+      "Implemented custom recovery mechanisms reducing data loss risk by 99.9%"
+    ]
   },
   {
     title: "Microservices Platform",
-    description: "Developed a scalable microservices platform handling 1M+ daily requests. Implemented distributed tracing and monitoring.",
-    technologies: ["Micronaut", "Kubernetes", "Prometheus", "Jaeger"],
+    description: "Architected and developed a scalable microservices platform handling 1M+ daily requests. Implemented comprehensive monitoring, tracing, and fault tolerance mechanisms.",
+    technologies: ["Micronaut", "Kubernetes", "Prometheus", "Jaeger", "gRPC"],
     category: "distributed",
     image: "/projects/microservices.jpg",
-    github: "https://github.com/yourusername/microservices-platform"
+    achievements: [
+      "Achieved 99.99% system uptime through robust error handling",
+      "Reduced mean time to resolution by 60% with enhanced monitoring",
+      "Implemented circuit breakers reducing cascading failures by 80%"
+    ]
   },
   {
     title: "Cloud-Native Application",
-    description: "Architected and deployed a cloud-native application using modern DevOps practices. Reduced deployment time by 60%.",
-    technologies: ["AWS", "Docker", "Terraform", "GitHub Actions"],
+    description: "Led the migration of legacy applications to cloud-native architecture. Implemented modern DevOps practices and automated deployment pipelines.",
+    technologies: ["AWS", "Docker", "Terraform", "GitHub Actions", "Kubernetes"],
     category: "cloud",
     image: "/projects/cloud-app.jpg",
-    link: "https://demo.example.com"
+    achievements: [
+      "Reduced deployment time by 60% through CI/CD automation",
+      "Achieved 50% cost reduction through efficient resource utilization",
+      "Implemented auto-scaling reducing manual intervention by 90%"
+    ]
   }
 ];
 
@@ -51,9 +63,9 @@ export default function Projects() {
     <div className="min-h-screen py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold mb-4">Projects</h1>
+          <h1 className="text-4xl font-bold mb-4">Professional Experience</h1>
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            A collection of my work showcasing expertise in distributed systems, backend development, and cloud technologies.
+            Key projects and achievements demonstrating expertise in distributed systems, backend development, and cloud technologies.
           </p>
         </div>
 
@@ -102,52 +114,36 @@ export default function Projects() {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-8">
           {filteredProjects.map((project) => (
             <div key={project.title} className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
-              <div className="relative h-48">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
               <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                <h3 className="text-2xl font-semibold mb-2">{project.title}</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                
+                {/* Key Achievements */}
+                <div className="mb-4">
+                  <h4 className="text-lg font-semibold mb-2">Key Achievements:</h4>
+                  <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300">
+                    {project.achievements.map((achievement, index) => (
+                      <li key={index}>{achievement}</li>
+                    ))}
+                  </ul>
                 </div>
-                <div className="flex space-x-4">
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <FaGithub className="w-5 h-5 mr-2" />
-                      View Code
-                    </a>
-                  )}
-                  {project.link && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <FaExternalLinkAlt className="w-5 h-5 mr-2" />
-                      Live Demo
-                    </a>
-                  )}
+
+                {/* Technologies */}
+                <div className="mb-4">
+                  <h4 className="text-lg font-semibold mb-2">Technologies Used:</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
